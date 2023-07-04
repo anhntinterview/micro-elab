@@ -1,8 +1,6 @@
 {
   "ts-node": {
-    "require": [
-      "tsconfig-paths/register"
-    ]
+    "require": ["tsconfig-paths/register"]
   },
   "compileOnSave": false,
   "compilerOptions": {
@@ -15,29 +13,16 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@core/*": [
-        "packages/core/src/app/*"
-      ],
-      "@template/*": [
-        "packages/template/src/app/*"
-      ]
+      "@core/*": ["packages/core/src/app/*"],
+      "@freedomwalking/shared": ["packages/shared/src/index.ts"],
+      "@template/*": ["packages/template/src/app/*"]
     }
   },
-  "include": [
-    "packages",
-    "**/*.ts",
-    "**/*.tsx",
-  ],
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "include": ["packages", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "tmp"]
 }
