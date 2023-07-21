@@ -41,8 +41,7 @@ jobs:
           envs: IMAGE_NAME,CONTAINER_NAME,{{ secrets.DOCKERHUB_USERNAME }},{{ secrets.DOCKERHUB_PASSWORD }}, ${{ secrets.DOCKERHUB_TAG }}
           script: |
             # Login to Docker Hub
-            cat ~/DOCKERHUB_PASSWORD.txt | docker login --username {{ secrets.DOCKERHUB_USERNAME }} --password-stdin ${{ secrets.HOST }}
-            # echo {{ secrets.DOCKERHUB_PASSWORD }} | docker login --username {{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+            echo {{ secrets.DOCKERHUB_PASSWORD }} | docker login -u {{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Stop running container
             docker stop ${{ env.CONTAINER_NAME }}
             # Remove old container & image
