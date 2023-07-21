@@ -41,12 +41,13 @@ jobs:
           envs: IMAGE_NAME,CONTAINER_NAME,{{ secrets.DOCKERHUB_USERNAME }},{{ secrets.DOCKERHUB_PASSWORD }}, ${{ secrets.DOCKERHUB_TAG }}
           script: |
             # Login to Docker Hub
-            echo {{ secrets.DOCKERHUB_PASSWORD }} | docker login -u {{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+            echo {{ secrets.DOCKERHUB_PASSWORD }} | docker login --username {{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Stop running container
             docker stop ${{ env.CONTAINER_NAME }}
             # Remove old container & image
             docker rm ${{ env.CONTAINER_NAME }}
-            docker rmi $(docker image ls -q)
+            # docker rmi $(docker image ls -q)
+            docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
             # Pull from DockerHub
             docker pull $(echo ${{ secrets.DOCKERHUB_USERNAME }})/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7)
             # Run a new container from a new image
