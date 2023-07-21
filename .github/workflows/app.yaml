@@ -42,11 +42,12 @@ jobs:
           npm install nx -g
           npm install
 
+      # https://nx.dev/packages/nx/documents/run-many
       - name: Build
-        run: TZ=UTC npm run nx run-many --all --target=build --parallel
+        run: TZ=UTC npx nx run-many --all --target=build --parallel
 
       - name: Test
-        run: TZ=UTC npm run nx run-many --all --target=test --parallel
+        run: TZ=UTC npx nx run-many --all --target=test --parallel
   # build_test:
   #   runs-on: ubuntu-latest
   #   strategy:
