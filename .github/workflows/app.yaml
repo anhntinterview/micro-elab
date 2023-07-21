@@ -89,9 +89,8 @@ jobs:
             # Login to Docker Hub
             # echo {{ secrets.DOCKERHUB_PASSWORD }} | docker login -u {{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Stop running container
-            docker stop ${{ env.CONTAINER_NAME }}
+            docker stop $(docker ps -q)
             # Remove old container & image
-            docker rm ${{ env.CONTAINER_NAME }}
             docker rm $(docker ps -a)
             docker image prune -a -f
             # Pull from DockerHub
@@ -119,9 +118,8 @@ jobs:
             # Login to Docker Hub
             # echo {{ secrets.DOCKERHUB_PASSWORD }} | docker login -u {{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Stop running container
-            docker stop ${{ env.CONTAINER_NAME }}
+            docker stop $(docker ps -q)
             # Remove old container & image
-            docker rm ${{ env.CONTAINER_NAME }}
             docker rm $(docker ps -a)
             docker image prune -a -f
             # Pull from DockerHub
