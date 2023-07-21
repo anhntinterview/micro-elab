@@ -1,0 +1,28 @@
+name: micro elab
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Image version"
+        required: true
+env:
+  IMAGE_NAME: elab-image
+  CONTAINER_NAME: elab-container
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Docker Hub Repository
+        uses: actions/checkout@v2
+      
+      # LOGIN AND PUSH IMAGE TO DOCKERHUB
+      - name: Log in to DockerHub
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: Build docker image
+        run: docker build -t $(echo ${{ secrets.DOCKERHUB_USERNAME }})/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7) .
+      - name: Push docker image to DockerHub
+        run: docker push $(echo $DOCKERHUB_TAG)/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7)

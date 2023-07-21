@@ -20,7 +20,8 @@
     "paths": {
       "@core/*": ["packages/core/src/app/*"],
       "@freedomwalking/shared": ["packages/shared/src/index.ts"],
-      "@template/*": ["packages/template/src/app/*"]
+      "@template/*": ["packages/template/src/app/*"],
+      "@shared/*": ["packages/shared/src/lib/*"]
     }
   },
   "include": ["packages", "**/*.ts", "**/*.tsx"],
