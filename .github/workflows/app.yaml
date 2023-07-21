@@ -25,4 +25,4 @@ jobs:
       - name: Build docker image
         run: docker build -t $(echo ${{ secrets.DOCKERHUB_USERNAME }})/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7) -f Dockerfile.app .
       - name: Push docker image to DockerHub
-        run: docker push $(echo $DOCKERHUB_TAG)/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7)
+        run: docker push $(echo ${{ secrets.DOCKERHUB_USERNAME }})/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7)
