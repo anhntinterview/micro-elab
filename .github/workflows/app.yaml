@@ -66,8 +66,8 @@ jobs:
           context: .
           file: ./Dockerfile.app
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }})/{{ env.IMAGE_NAME }}:${{ secrets.DOCKERHUB_TAG }}
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }})/{{ env.IMAGE_NAME }}:${{ secrets.DOCKERHUB_TAG }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/{{ env.IMAGE_NAME }}:${{ secrets.DOCKERHUB_TAG }}
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/{{ env.IMAGE_NAME }}:${{ secrets.DOCKERHUB_TAG }}
           cache-to: type=inline
 
       # - name: Build docker image
