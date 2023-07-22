@@ -53,7 +53,7 @@ jobs:
     needs: build_test
     steps:
       - name: Checkout Docker Hub Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       # LOGIN AND PUSH IMAGE TO DOCKERHUB
       - name: Log in to DockerHub
@@ -66,7 +66,6 @@ jobs:
           context: .
           file: ./Dockerfile.app
           push: true
-          envs: IMAGE_NAME
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ secrets.DOCKERHUB_TAG }}
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/$(echo $IMAGE_NAME):${{ secrets.DOCKERHUB_TAG }}
           # tags: ${{ secrets.DOCKERHUB_USERNAME }}/elab-image:${{ secrets.DOCKERHUB_TAG }}
@@ -81,6 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     needs: build_and_push
+    # All of error was fixed so the "continue-on-error" should be false
     continue-on-error: false
     steps:
       - name: Deploy to Digital Ocean droplet from DockerHub
@@ -111,6 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     needs: dev
+    # All of error was fixed so the "continue-on-error" should be false
     continue-on-error: false
     steps:
       - name: Deploy to Digital Ocean droplet from DockerHub
