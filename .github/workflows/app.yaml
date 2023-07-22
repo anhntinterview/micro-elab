@@ -67,7 +67,7 @@ jobs:
           file: ./Dockerfile.app
           push: true
           envs: IMAGE_NAME
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/$(echo $IMAGE_NAME):${{ secrets.DOCKERHUB_TAG }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ secrets.DOCKERHUB_TAG }}
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/$(echo $IMAGE_NAME):${{ secrets.DOCKERHUB_TAG }}
           # tags: ${{ secrets.DOCKERHUB_USERNAME }}/elab-image:${{ secrets.DOCKERHUB_TAG }}
           # cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/elab-image:${{ secrets.DOCKERHUB_TAG }}
