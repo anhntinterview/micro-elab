@@ -64,11 +64,10 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          envs: IMAGE_NAME,CONTAINER_NAME,{{ secrets.DOCKERHUB_USERNAME }},{{ secrets.DOCKERHUB_PASSWORD }}, ${{ secrets.DOCKERHUB_TAG }}
           file: ./Dockerfile.app
           push: true
-          tags: $(echo ${{ secrets.DOCKERHUB_USERNAME }})/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7)
-          cache-from: type=registry,ref=$(echo ${{ secrets.DOCKERHUB_USERNAME }})/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7)
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/elab-image:${{ secrets.DOCKERHUB_TAG }}
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/elab-image:${{ secrets.DOCKERHUB_TAG }}
           cache-to: type=inline
 
       # - name: Build docker image
