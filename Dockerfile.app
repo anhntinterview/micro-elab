@@ -8,9 +8,15 @@ COPY . /app
 
 RUN yarn build:app --production
 
-COPY ./packages/app/.next/server/client-reference-manifest.js /app/dist/packages/app/.next/server/client-reference-manifest.js
+WORKDIR /app/dist/packages/app/.next/server
 
-COPY ./packages/app/.next/server/client-reference-manifest.json /app/dist/packages/app/.next/server/client-reference-manifest.json
+RUN ls -alh
+
+WORKDIR /app
+
+COPY ./deploy/client-reference-manifest.js /app/dist/packages/app/.next/server/client-reference-manifest.js
+
+COPY ./deploy/client-reference-manifest.json /app/dist/packages/app/.next/server/client-reference-manifest.json
 
 WORKDIR /app/dist/packages/app/.next/server
 

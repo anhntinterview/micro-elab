@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev:app": "npx nx serve app",
-    "build:app": "npx nx build app",
+    "build:app": "npx nx build app --prod",
     "start:app": "npx nx serve app --prod",
     "dev:core": "npx nx serve core",
     "build:core": "npx nx build core",
