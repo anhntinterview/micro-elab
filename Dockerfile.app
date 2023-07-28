@@ -14,9 +14,9 @@ RUN ls -alh
 
 WORKDIR /app
 
-COPY ./deploy/client-reference-manifest.js /app/dist/packages/app/.next/server/client-reference-manifest.js
+COPY ./packages/app/deploy/client-reference-manifest.js /app/dist/packages/app/.next/server/client-reference-manifest.js
 
-COPY ./deploy/client-reference-manifest.json /app/dist/packages/app/.next/server/client-reference-manifest.json
+COPY ./packages/app/deploy/client-reference-manifest.json /app/dist/packages/app/.next/server/client-reference-manifest.json
 
 WORKDIR /app/dist/packages/app/.next/server
 
