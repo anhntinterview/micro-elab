@@ -32,8 +32,7 @@
         },
         "production": {
           "buildTarget": "app:build:production",
-          "dev": false,
-          "port": 80
+          "dev": false
         }
       }
     },
