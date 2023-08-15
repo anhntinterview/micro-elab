@@ -88,14 +88,14 @@ jobs:
             # Login to Docker Hub
             # echo {{ secrets.DOCKERHUB_PASSWORD }} | docker login -u {{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Stop & Remove running container & image
-            if [ "$(docker ps -a | grep -c ${{ env.CONTAINER_NAME }})" -gt 0 ]; then
-            docker stop ${{ env.CONTAINER_NAME }}
-            docker rm ${{ env.CONTAINER_NAME }}
-            docker image prune -a -f
-            echo "[---- Deleted container ${{ env.CONTAINER_NAME }}]"
-            else
-            echo "[---- Container with name: ${{ env.CONTAINER_NAME }}  doesn't exist. ]"
-            fi
+            # if [ "$(docker ps -a | grep -c ${{ env.CONTAINER_NAME }})" -gt 0 ]; then
+            # docker stop ${{ env.CONTAINER_NAME }}
+            # docker rm ${{ env.CONTAINER_NAME }}
+            # docker image prune -a -f
+            # echo "[---- Deleted container ${{ env.CONTAINER_NAME }}]"
+            # else
+            # echo "[---- Container with name: ${{ env.CONTAINER_NAME }}  doesn't exist. ]"
+            # fi
             # Pull from DockerHub
             docker pull $(echo ${{ secrets.DOCKERHUB_USERNAME }})/$(echo $IMAGE_NAME):$(echo ${{ secrets.DOCKERHUB_TAG }} | head -c7)
             # Run a new container from a new image
