@@ -23,7 +23,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "app:build",
-        "dev": true
+        "port": 80
       },
       "configurations": {
         "development": {
@@ -32,8 +32,7 @@
         },
         "production": {
           "buildTarget": "app:build:production",
-          "dev": false,
-          "port": 80
+          "dev": false
         }
       }
     },
