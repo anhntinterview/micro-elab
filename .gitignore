@@ -39,6 +39,7 @@ testem.log
 Thumbs.db
 
 # Next.js
+dist
 .next
 .env.development.local
 .env.production.local

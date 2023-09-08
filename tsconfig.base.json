@@ -18,6 +18,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@app/*": ["packages/app/*"],
       "@core/*": ["packages/core/src/app/*"],
       "@freedomwalking/shared": ["packages/shared/src/index.ts"],
       "@template/*": ["packages/template/src/app/*"],

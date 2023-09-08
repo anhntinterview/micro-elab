@@ -1,5 +1,9 @@
-import styles from './page.module.scss';
-import { NxWelcome } from "@core/nx-welcome";
+// https://themenectar.com/salient/blog-magazine/
+// /
+
+import Articles from '@app/components/articles';
+import Hero from '@app/components/hero';
+import Pagination from '@app/components/pagination';
 
 export default async function Index() {
   /*
@@ -8,10 +12,10 @@ export default async function Index() {
    * Note: The corresponding styles are in the ./index.scss file.
    */
   return (
-    <div className={styles.page}>
-      <div className="wrapper">
-        <NxWelcome title='Hello I am from Core'/>
-      </div>
-    </div>
+    <>
+      <Hero />
+      <Articles />
+      <Pagination />
+    </>
   );
 }

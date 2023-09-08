@@ -1,0 +1,76 @@
+:root {
+  --height-logo-header: 40px;
+  --height-logo-footer: 40px;
+  --height-logo-mobile-header: 34px;
+  --height-logo-mobile-footer: 34px;
+  --max-width-global-wrap: 1600px;
+  --max-width-post-wrap: 720px;
+  --grid-gap: 16px;
+  --border-radius: 26px;
+  --margin-wrap-left-right: 5vw;
+  --font-family-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --font-family-one: var(--font-family-system);
+  --font-weight-one-light: 300;
+  --font-weight-one-bold: 700;
+  --font-family-two: var(--font-family-system);
+  --font-weight-two-bold: 700;
+  --font-family-three: var(--font-family-system);
+  --font-weight-three-regular: 400;
+  --font-weight-three-medium: 500;
+  --font-weight-three-bold: 700;
+  --ghost-accent-color: #ff4d82;
+  --color-font-one: #151618;
+  --color-font-two: #fff;
+  --color-font-three: #151618;
+  --color-font-four: #fff;
+  --color-font-five: #151618;
+  --color-font-six: #fff;
+  --color-font-black: #151618;
+  --color-one: #efeef0;
+  --color-two: #e6e6ea;
+  --color-three: #151618;
+  --color-four: #151618;
+  --color-five: #151618;
+  --color-six: #fff;
+  --color-seven: #151618;
+  --color-eight: #efeef0;
+  --color-nine: #f6f6f8;
+  --color-ten: #fff;
+  --color-eleven: #f6f6f8;
+  --color-twelve: #f2f0f2;
+  --color-thirteen: #e6e6ea;
+  --color-white: #fff;
+  --color-body: #fff;
+  --color-body-partial: #fff;
+  --color-border-one: #ceced0;
+  --color-border-two: #ceced0;
+  --color-border-three: #797c82;
+  --border: 1px solid;
+  --color-alert-success: #61d6ad;
+  --color-alert-error: #ff6c78;
+  --opacity-one: 0.8;
+  --opacity-two: 1;
+}
+
+body {
+  font-family: var(--font-family-three);
+  font-size: 2rem;
+  font-weight: var(--font-weight-three-regular);
+  line-height: 1.5;
+  word-wrap: break-word;
+  word-break: break-word;
+  color: var(--color-font-one);
+  background-color: var(--color-body);
+}
+
+.global-wrap, .global-content {
+  min-height: 100vh;
+}
+
+.global-content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}

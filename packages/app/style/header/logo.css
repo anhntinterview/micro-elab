@@ -1,0 +1,15 @@
+.header-logo {
+  line-height: 0;
+  flex: 0 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  img {
+    width: auto;
+    height: var(--height-logo-header);
+  }
+  .is-logo {
+    img {
+      aspect-ratio: attr(width) / attr(height);
+    }
+  }
+}

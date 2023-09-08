@@ -1,0 +1,9 @@
+.header-search {
+    display: block;
+    cursor: pointer;
+  
+    &.is-mobile svg {
+      display: block;
+      cursor: pointer;
+    }
+  }

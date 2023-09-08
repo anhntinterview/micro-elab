@@ -1,0 +1,13 @@
+.global-padding {
+  max-width: var(--max-width-global-wrap);
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--margin-wrap-left-right);
+  padding-left: var(--margin-wrap-left-right);
+}
+
+[type='checkbox'],
+[type='radio'] {
+  box-sizing: border-box;
+  padding: 0;
+}

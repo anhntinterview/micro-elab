@@ -1,0 +1,15 @@
+.header-checkbox {
+  display: none;
+
+  &:checked {
+    display: none;
+
+    ~ nav {
+      display: none;
+      position: absolute;
+      ul {
+        position: relative;
+      }
+    }
+  }
+}
