@@ -1,7 +1,0 @@
-.footer-logo {
-  .is-logo {
-    img {
-      aspect-ratio: attr(width) / attr(height);
-    }
-  }
-}

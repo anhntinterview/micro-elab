@@ -8,13 +8,11 @@ const SignUpForm: React.FunctionComponent<ISignUpForm> = (props) => {
       <form action="">
         <h1 className="custom-title global-title">Create Account</h1>
         <input
-          data-members-name=""
           type="text"
           placeholder="Your name"
           aria-label="Your name"
         />
         <input
-          data-members-email=""
           type="email"
           placeholder="Your email address"
           aria-label="Your email address"

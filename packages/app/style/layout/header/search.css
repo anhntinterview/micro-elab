@@ -1,0 +1,46 @@
+.header-search.is-desktop + {
+  .signup,
+  .account {
+    margin-left: 0.5vw;
+  }
+}
+
+.header-search.is-desktop {
+  padding: 6px 20px;
+  text-decoration: none;
+}
+
+.header-search {
+  &.is-desktop:hover {
+    opacity: 1;
+    background-color: var(--color-two);
+  }
+
+  display: block;
+  cursor: pointer;
+
+  &.is-mobile svg {
+    display: block;
+    cursor: pointer;
+  }
+
+  svg {
+    width: 15px;
+  }
+
+  &:not(.is-mobile) svg {
+    margin-right: 6px;
+    transform: translateY(1px);
+  }
+
+  &.is-mobile {
+    display: none;
+
+    svg {
+      position: absolute;
+      top: 9px;
+      right: 46px;
+      width: 24px;
+    }
+  }
+}

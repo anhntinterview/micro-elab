@@ -3,13 +3,17 @@
   flex: 0 0 auto;
   margin-top: 30px;
   margin-bottom: 30px;
+
   img {
     width: auto;
     height: var(--height-logo-header);
   }
-  .is-logo {
-    img {
-      aspect-ratio: attr(width) / attr(height);
-    }
+
+  .is-title {
+    font-family: var(--font-family-one);
+    font-size: 4rem;
+    font-weight: var(--font-weight-one-bold);
+    line-height: 1;
+    max-width: 400px;
   }
 }

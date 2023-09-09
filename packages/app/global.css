@@ -1,10 +1,31 @@
 @import "tailwindcss/base";
-@import "./style/base.css";
+@import "./style/core/root.css";
+@import "./style/core/base.css";
+@import "./style/core/global.css";
 
 @import "tailwindcss/components";
-@import "./style/screen.css";
-@import "./style/header/style.css";
-@import "./style/footer.css";
+@import "./style/layout/header.css";
+@import "./style/layout/archive.css";
+@import "./style/layout/customer.css";
+@import "./style/layout/customer-archive.css";
+@import "./style/layout/feature.css";
+@import "./style/layout/footer.css";
+@import "./style/layout/hero.css";
+@import "./style/layout/item.css";
+@import "./style/layout/loop.css";
+@import "./style/layout/navigation.css";
+@import "./style/layout/subcribe.css";
 
+@import "./style/component/search.css";
+@import "./style/component/account.css";
+@import "./style/component/comment.css";
+@import "./style/component/faq.css";
+@import "./style/component/membership.css";
+@import "./style/component/post.css";
 
 @import "tailwindcss/utilities";
+@import "./style/util/carousel.css";
+@import "./style/util/effect.css";
+@import "./style/util/is-partial.css";
+@import "./style/util/pagination.css";
+@import "./style/util/progress.css";

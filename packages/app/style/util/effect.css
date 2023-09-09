@@ -1,0 +1,19 @@
+.lightense-backdrop {
+  z-index: 99998 !important;
+  background-color: var(--color-body) !important;
+  -webkit-backdrop-filter: initial !important;
+  backdrop-filter: initial !important;
+}
+
+.lightense-wrap {
+  ~ {
+    br,
+    small {
+      display: none;
+    }
+  }
+
+  img {
+    border-radius: 0 !important;
+  }
+}

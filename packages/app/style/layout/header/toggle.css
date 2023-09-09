@@ -1,4 +1,16 @@
 .header-toggle {
+  display: none;
+}
+
+.header-toggle {
+  position: relative;
+
+  > span {
+    position: relative;
+  }
+}
+
+.header-toggle {
   z-index: 99;
   overflow: visible;
   width: 30px;
@@ -10,27 +22,28 @@
   outline: 0;
   background-color: transparent;
   will-change: transform;
-}
 
-.header-toggle {
-  display: none;
-  position: relative;
-  > span,
+  > span {
+    top: calc(50% + 3px);
+    display: block;
+    width: 100%;
+  }
+
   .bar {
     display: block;
     width: 100%;
-    position: absolute;
     height: 3px;
     content: '';
     transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
       top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s;
     background-color: var(--color-three);
+
     &:nth-child(1) {
       top: -10px;
     }
-  }
-  > span {
-    top: calc(50% + 3px);
-    position: relative;
+
+    &:nth-child(3) {
+      top: 10px;
+    }
   }
 }

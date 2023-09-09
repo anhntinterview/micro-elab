@@ -1,0 +1,176 @@
+wrap {
+  flex-wrap: wrap;
+  padding: 4vh 0;
+  border-top: var(--border) var(--color-border-one);
+  display: flex;
+
+  a {
+    display: flex;
+  }
+}
+
+.navigation-content {
+  line-height: 0;
+  display: inline-block;
+  width: 100%;
+  padding: 1vh 0;
+}
+
+.navigation-wrap a {
+  flex: 0 0 50%;
+  box-sizing: border-box;
+  max-width: 640px;
+  min-height: 160px;
+  pointer-events: none;
+
+  &:first-child:last-child {
+    flex-grow: 1;
+  }
+}
+
+.navigation-next {
+  padding-right: 2vw;
+}
+
+.navigation-prev {
+  margin-left: auto;
+  padding-left: 2vh;
+  text-align: right;
+}
+
+.navigation-wrap small {
+  font-family: var(--font-family-three);
+  font-size: 1.4rem;
+  font-weight: var(--font-weight-three-medium);
+  line-height: 1;
+  display: inline-block;
+  margin: 2vh 0 1vh;
+}
+
+.navigation-next small {
+  padding-right: 0.6vw;
+}
+
+.navigation-prev small {
+  padding-left: 0.6vw;
+}
+
+.navigation-wrap h3 {
+  font-family: var(--font-family-two);
+  font-size: 2.8rem;
+  font-weight: var(--font-weight-two-bold);
+  display: inline;
+  margin: 5px 0;
+  pointer-events: auto;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.navigation-image {
+  line-height: 0;
+  position: relative;
+  flex: 0 0 auto;
+  width: 160px;
+  height: 160px;
+  transition: transform 0.3s ease;
+  pointer-events: auto;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.navigation-next .navigation-image {
+  margin-right: 1.8vw;
+}
+
+.navigation-prev .navigation-image {
+  margin-left: 1.8vw;
+}
+
+@media (max-width: 1280px) {
+  .navigation-wrap {
+    small {
+      margin-top: 1.5vh;
+    }
+
+    h3 {
+      font-size: 2.4rem;
+    }
+  }
+
+  .navigation-image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navigation-wrap {
+    a {
+      min-height: 100px;
+    }
+
+    small {
+      margin-top: 0;
+    }
+
+    h3 {
+      font-size: 2.2rem;
+    }
+  }
+
+  .navigation-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .navigation-next .navigation-image {
+    margin-right: 2.4vw;
+  }
+
+  .navigation-prev .navigation-image {
+    margin-left: 2.4vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation-wrap a {
+    flex-basis: 100%;
+
+    + a {
+      margin-top: 4vh;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation-wrap {
+    a {
+      min-height: 80px;
+    }
+
+    small {
+      font-size: 1.2rem;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+    }
+  }
+
+  .navigation-image {
+    width: 80px;
+    height: 80px;
+  }
+}
