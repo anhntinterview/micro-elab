@@ -1,9 +1,5 @@
 import { Inter } from 'next/font/google';
-import { ReactNode, Suspense } from 'react';
 import '@app/all.css';
-import Header from '@app/components/layout/header';
-import Footer from '@app/components/layout/footer';
-import Search from '@app/components/search';
 
 const { SITE_NAME, DOMAIN, PORT } = process.env;
 
@@ -33,18 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="custom-page">
-        <div className="global-wrap">
-          <div className="global-content">
-            <Search />
-            <Header />
-            <Suspense>
-              <div>{children}</div>
-            </Suspense>
-            <Footer />
-          </div>
-        </div>
-      </body>
+      <body className="custom-page">{children}</body>
     </html>
   );
 }

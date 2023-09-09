@@ -1,8 +1,5 @@
 import * as React from 'react';
-import AsideLayout1 from '../layout/AsideLayout1';
-import RightMainLayout1 from '../layout/RightMainLayout1';
 
-interface ISignupProps {}
 export interface ISignUpForm {}
 
 const SignUpForm: React.FunctionComponent<ISignUpForm> = (props) => {
@@ -60,15 +57,4 @@ const SignUpForm: React.FunctionComponent<ISignUpForm> = (props) => {
   );
 };
 
-const SignUpComponent: React.FunctionComponent<ISignupProps> = (props) => {
-  return (
-    <>
-      <AsideLayout1
-        urlImage={`url('/bg2.jpeg')`}
-      />
-      <RightMainLayout1 children={<SignUpForm/>} />
-    </>
-  );
-};
-
-export default SignUpComponent;
+export default SignUpForm;

@@ -1,8 +1,5 @@
 import * as React from 'react';
-import AsideLayout1 from '../layout/AsideLayout1';
-import RightMainLayout1 from '../layout/RightMainLayout1';
 
-interface IContactProps {}
 export interface IContactForm {}
 
 const ContactForm: React.FunctionComponent<IContactForm> = (props) => {
@@ -32,13 +29,4 @@ const ContactForm: React.FunctionComponent<IContactForm> = (props) => {
   );
 };
 
-const ContactComponent: React.FunctionComponent<IContactProps> = (props) => {
-  return (
-    <>
-      <AsideLayout1 urlImage={`url('/bg5.jpeg')`} />
-      <RightMainLayout1 children={<ContactForm />} />
-    </>
-  );
-};
-
-export default ContactComponent;
+export default ContactForm;

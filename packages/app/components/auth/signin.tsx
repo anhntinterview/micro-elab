@@ -1,8 +1,5 @@
 import * as React from 'react';
-import AsideLayout1 from '../layout/AsideLayout1';
-import RightMainLayout1 from '../layout/RightMainLayout1';
 
-interface ISignInProps {}
 export interface ISignInForm {}
 
 const SignInForm: React.FunctionComponent<ISignInForm> = (props) => {
@@ -43,15 +40,4 @@ const SignInForm: React.FunctionComponent<ISignInForm> = (props) => {
   );
 };
 
-const SignInComponent: React.FunctionComponent<ISignInProps> = (props) => {
-  return (
-    <>
-      <AsideLayout1
-        urlImage={`url('/bg1.jpeg')`}
-      />
-      <RightMainLayout1 children={<SignInForm />} />
-    </>
-  );
-};
-
-export default SignInComponent;
+export default SignInForm;
