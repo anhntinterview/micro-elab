@@ -1,0 +1,15 @@
+.pagination-section {
+  padding-bottom: 3vh;
+  text-align: center;
+
+  button {
+    margin-top: 3vh;
+    margin-bottom: 14vh;
+  }
+}
+
+@media (max-width: 1480px) {
+  .pagination-section button {
+    margin-bottom: 8vh;
+  }
+}

@@ -1,0 +1,49 @@
+.comments-section {
+  min-height: 8vh;
+}
+
+.comments-wrap {
+  border-top: var(--border) var(--color-border-one);
+}
+
+.comments-content {
+  max-width: var(--max-width-post-wrap);
+  margin-right: auto;
+  margin-left: auto;
+
+  > div {
+    &:first-of-type {
+      padding-top: 8vh;
+    }
+
+    &:last-of-type {
+      padding-bottom: 12vh;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .comments-content {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .comments-section {
+    min-height: 6vh;
+  }
+
+  .comments-content {
+    max-width: 100%;
+
+    > div {
+      &:first-of-type {
+        padding-top: 4vh;
+      }
+
+      &:last-of-type {
+        padding-bottom: 8vh;
+      }
+    }
+  }
+}

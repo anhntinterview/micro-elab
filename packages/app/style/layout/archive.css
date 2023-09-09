@@ -1,0 +1,142 @@
+.archive-section {
+  padding: 4vh 0 11vh;
+  text-align: center;
+  color: var(--color-font-one);
+  background-color: var(--color-body-partial);
+
+  &.is-image {
+    padding-top: 0;
+  }
+}
+
+.archive-social,
+.archive-excerpt {
+  margin: 3vh auto 0;
+}
+
+.archive-title,
+.archive-excerpt {
+  box-sizing: border-box;
+  padding: 0 var(--margin-wrap-left-right);
+}
+
+.archive-image img,
+.archive-title span {
+  background-color: var(--color-one);
+}
+
+.archive-image {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 20px;
+
+  img {
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 100%;
+  }
+}
+
+.archive-title {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0.5vh;
+
+  &.is-tag {
+    transform: translateX(-5px);
+
+    span {
+      font-family: var(--font-family-three);
+      font-size: 1.8rem;
+      font-weight: var(--font-weight-three-bold);
+      position: absolute;
+      margin-left: 6px;
+      padding: 5px 10px 4px;
+      border-radius: 100px;
+    }
+  }
+}
+
+.archive-excerpt {
+  max-width: 880px;
+}
+
+.archive-social {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  a,
+  span {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    margin: 0 20px 4px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    fill: var(--color-font-one);
+  }
+}
+
+@media (max-width: 1280px) {
+  .archive-title.is-tag span {
+    font-size: 1.4rem;
+    padding: 3px 8px 4px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .archive-section {
+    padding-top: 3vh;
+  }
+
+  .archive-image {
+    width: 160px;
+    height: 160px;
+  }
+
+  .archive-social {
+    a,
+    span {
+      font-size: 1.6rem;
+    }
+  }
+
+  .archive-excerpt {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 480px) {
+  .archive-section {
+    padding-bottom: 8vh;
+  }
+
+  .archive-image {
+    width: 140px;
+    height: 140px;
+  }
+
+  .archive-social {
+    a,
+    span {
+      font-size: 1.4rem;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+    }
+  }
+}

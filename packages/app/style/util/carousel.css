@@ -1,0 +1,36 @@
+.flickity-enabled {
+  position: relative;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.flickity-viewport {
+  position: relative;
+  height: 100%;
+}
+
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.flickity-enabled.is-draggable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+
+  .flickity-viewport {
+    cursor: -webkit-grab;
+    cursor: grab;
+
+    &.is-pointer-down {
+      cursor: -webkit-grabbing;
+      cursor: grabbing;
+    }
+  }
+}
