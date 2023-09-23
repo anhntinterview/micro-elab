@@ -1,11 +1,12 @@
+import 'reflect-metadata';
 import * as React from 'react';
 import { Suspense } from 'react';
 
-import Header from '@app/components/layout/header';
-import Footer from '@app/components/layout/footer';
-import Search from '@app/components/search';
-import AsideLayout1 from '@app/components/layout/AsideLayout1';
-import RightMainLayout1 from '@app/components/layout/RightMainLayout1';
+import Header from '@app/app/components/layout/header';
+import Footer from '@app/app/components/layout/footer';
+import Search from '@app/app/components/search';
+import AsideLayout1 from '@app/app/components/layout/AsideLayout1';
+import RightMainLayout1 from '@app/app/components/layout/RightMainLayout1';
 
 export const FormLayoutProvider = ({
   children,

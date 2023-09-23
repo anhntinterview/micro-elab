@@ -1,0 +1,10 @@
+export const SITE_NAME = "Freedom Walking"
+export const PROTOCAL = "http://"
+export const DOMAIN = "localhost"
+export const API_PORT = 3000
+export const PORT = 4200
+export const SECRET_API_KEY = "123456789"
+export const REVALIDATE_WINDOW = 1000 * 60 * 60; // 1 hours
+export const API_BASE_URL = `${PROTOCAL}${DOMAIN}:${API_PORT}` || 'http://localhost:3000';
+export const ENVIRONMENT = 'development'
+export const revalidateTime = 1 * 24 * 60 * 60 * 1000 // 1 day

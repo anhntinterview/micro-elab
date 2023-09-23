@@ -1,7 +1,9 @@
 import { Inter } from 'next/font/google';
 import '@app/all.css';
-
-const { SITE_NAME, DOMAIN, PORT } = process.env;
+// *** CLIENT STATE MANAGEMENT ***
+import Provider from '@app/app/template/module/provider';
+// *** END CLIENT STATE MANAGEMENT ***
+import { DOMAIN, PORT, SITE_NAME } from './template/envVars';
 
 export const metadata = {
   metadataBase: new URL(`${DOMAIN}:${PORT}`),
@@ -29,7 +31,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="custom-page">{children}</body>
+      <body className="custom-page">
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }

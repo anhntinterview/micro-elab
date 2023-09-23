@@ -1,3 +1,13 @@
+import { DTO } from "./entity";
+
+export type ListRes<T> = {
+  data: DTO<T>
+}
+
+export type ItemRes<T> = {
+  data: T
+}
+
 export type Edge<T> = {
   node: T;
 };
@@ -32,3 +42,5 @@ export type PagesOperation = {
     pages: Connection<Page>;
   };
 };
+
+

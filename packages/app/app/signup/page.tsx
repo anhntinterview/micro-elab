@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormLayoutProvider } from '../core/layout/layout.provider';
-import SignUpForm from '@app/components/auth/signup';
+import SignUpForm from '@app/app/components/auth/signup';
 
 interface ISignUpProps {}
 

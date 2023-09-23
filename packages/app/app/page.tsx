@@ -1,22 +1,23 @@
 // https://themenectar.com/salient/blog-magazine/
-// /
-
-import Articles from '@app/components/articles';
-import Hero from '@app/components/hero';
-import Pagination from '@app/components/pagination';
+import Hero from '@app/app/components/hero';
+import Pagination from '@app/app/components/pagination';
 import { MasterLayoutProvider } from './core/layout/layout.provider';
+import { Metadata } from 'next';
+import Post from './components/posts';
+
+export const metadata: Metadata = {
+  title: "Freedom Walking Blog",
+  description:
+    "Robert's blog.",
+}
 
 export default async function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.scss file.
-   */
   return (
     <MasterLayoutProvider>
       <Hero />
-      <Articles />
+      <Post />
       <Pagination />
     </MasterLayoutProvider>
   );
 }
+

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ContactForm from '@app/components/contact';
+import ContactForm from '@app/app/components/contact';
 import { FormLayoutProvider } from '../core/layout/layout.provider';
 
 interface IContactProps {}

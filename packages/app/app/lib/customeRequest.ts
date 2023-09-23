@@ -1,11 +1,7 @@
-import { Connection } from './type';
-import { isShopifyError } from './type-guard';
+import { Connection } from '../template/app.type';
+import { isCustomError } from './typeGuard';
+import { API_BASE_URL } from '@app/app/template/envVars';
 
-const { DOMAIN, PORT } = process.env;
-
-const domain = `${DOMAIN}:${PORT}`;
-
-const endpoint = `${domain}`;
 type ExtractVariables<T> = T extends { variables: object }
   ? T['variables']
   : never;
@@ -14,7 +10,7 @@ export const removeEdgesAndNodes = (array: Connection<any>) => {
   return array.edges.map((edge) => edge?.node);
 };
 
-export async function shopifyFetch<T>({
+export async function customFetch<T>({
   cache = 'force-cache',
   headers,
   query,
@@ -28,7 +24,8 @@ export async function shopifyFetch<T>({
   variables?: ExtractVariables<T>;
 }): Promise<{ status: number; body: T } | never> {
   try {
-    const result = await fetch(endpoint, {
+    // const result = await fetch(API_BASE_URL, {
+    const result = await fetch(API_BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +50,7 @@ export async function shopifyFetch<T>({
       body,
     };
   } catch (e) {
-    if (isShopifyError(e)) {
+    if (isCustomError(e)) {
       throw {
         cause: e.cause?.toString() || 'unknown',
         status: e.status || 500,

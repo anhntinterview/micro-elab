@@ -2,6 +2,10 @@ import * as React from 'react';
 
 export interface ISignUpForm {}
 
+export const getStaticProps = async () => {
+  
+}
+
 const SignUpForm: React.FunctionComponent<ISignUpForm> = (props) => {
   return (
     <>

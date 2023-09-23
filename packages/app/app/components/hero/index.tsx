@@ -1,14 +1,16 @@
+'use client';
+
 import * as React from 'react';
-import {
-  heroStyle2,
-  heroStyle3
-} from './inlineStyle';
+import { heroStyle2, heroStyle3 } from './inlineStyle';
 import CardLayout1 from '../card/CardLayout1';
 import Subcribe from '../subcribe';
+import { usePostContext } from '../../template/context/post.provider';
+import Loading from '../loading';
 
 interface IHeroProps {}
 
-const Hero: React.FunctionComponent<IHeroProps> = (props) => {
+const Hero: React.FunctionComponent<IHeroProps> = ({}) => {
+  const { list, isFetched } = usePostContext();
   return (
     <div className="hero-section">
       <div className="hero-wrap">
@@ -46,7 +48,13 @@ const Hero: React.FunctionComponent<IHeroProps> = (props) => {
             >
               <div className="flickity-viewport" style={heroStyle2}>
                 <div className="flickity-slider" style={heroStyle3}>
-                  <CardLayout1 />
+                  {isFetched && list ? (
+                    list.map((item) => {
+                      return <CardLayout1 post={item} />;
+                    })
+                  ) : (
+                    <Loading />
+                  )}
                 </div>
               </div>
             </div>

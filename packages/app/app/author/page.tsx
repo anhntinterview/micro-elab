@@ -1,4 +1,4 @@
-import Intro from '@app/components/author/intro';
+import Intro from '@app/app/components/author/intro';
 import * as React from 'react';
 import { MasterLayoutProvider } from '../core/layout/layout.provider';
 
