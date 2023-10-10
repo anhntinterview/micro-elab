@@ -2,7 +2,10 @@
 
 import CRUDService from '@app/app/core/service/crud/crud.service';
 import { DTO } from '@app/app/template/entity';
-import { Post } from '@app/app/template/entity/post.entity';
+import {
+  Post,
+  PostBodyDataValidation,
+} from '@app/app/template/entity/post.entity';
 import { createContext, useContext } from 'react';
 import Container from 'typedi';
 
@@ -11,22 +14,39 @@ interface PostProviderProps {
 }
 export type PostContextType = {
   list: Array<Post> | undefined;
-  isFetched: boolean
+  isFetched: boolean;
+  addPost: (body: PostBodyDataValidation) => void;
 };
 
 const PostContext = createContext<PostContextType | null>(null);
 
 export const PostProvider = ({ children }: PostProviderProps) => {
   const crudService = Container.get(CRUDService<DTO<Post>>);
+  // GET
   const postQueryKey = ['posts'];
   crudService.endpoint = '/post';
-  const { data, isFetched } = crudService.all(postQueryKey);
+  crudService.queryKey = postQueryKey;
+  const { data, isFetched } = crudService.all;
   let list = undefined;
   if (isFetched && data) {
     list = data.list;
   }
+  // POST
+  const addPostQueryKey = ['add_posts'];
+  const addPost = (body: PostBodyDataValidation) => {
+    crudService.endpoint = '/post/c'
+    crudService.body = JSON.stringify(body);
+    crudService.queryKey = addPostQueryKey;
+    crudService.add.mutate();
+  };
   return (
-    <PostContext.Provider value={{ list, isFetched }}>{children}</PostContext.Provider>
+    <PostContext.Provider value={{ 
+      list, 
+      isFetched, 
+      addPost
+     }}>
+      {children}
+    </PostContext.Provider>
   );
 };
 

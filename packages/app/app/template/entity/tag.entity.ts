@@ -7,10 +7,15 @@ import {
 } from 'class-validator';
 import { Post } from './post.entity';
 
+export enum TAG_NAME {
+  'CUSTOMER' = 'customer',
+  'POST' = 'post',
+}
+
 export class Tag {
   @IsString()
   @IsNotEmpty()
-  name!: string;
+  name!: TAG_NAME;
 
   @IsArray()
   @ValidateNested({ each: true })

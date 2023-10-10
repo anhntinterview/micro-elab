@@ -51,7 +51,7 @@ export default Posts;
 import * as React from 'react';
 import CardLayout2 from '../card/CardLayout2';
 import CardLayout1 from '../card/CardLayout1';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Post } from '@app/app/template/entity/post.entity';
 import { CustomerBodyDataValidation } from '@app/app/template/entity/customer.entity';
 import { ROLE_NAME } from '@app/app/template/entity/role.entity';

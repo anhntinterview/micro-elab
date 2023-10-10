@@ -1,4 +1,4 @@
-// https://themenectar.com/salient/blog-magazine/
+// https://basho.fueko.net/
 import Hero from '@app/app/components/hero';
 import Pagination from '@app/app/components/pagination';
 import { MasterLayoutProvider } from './core/layout/layout.provider';

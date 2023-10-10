@@ -57,3 +57,28 @@ export class Post {
   tags?: Array<Tag>;
 }
 
+export class PostBodyDataValidation {
+  @IsNotEmpty()
+  @IsString()
+  title!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  coverImage!: string;
+
+  @IsString()
+  ogImage!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  content!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  customerId!: string;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Tag)
+  tags?: Array<Tag>;
+}

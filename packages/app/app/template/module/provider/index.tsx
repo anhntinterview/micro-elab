@@ -1,7 +1,7 @@
 'use client';
 
 import { PostProvider } from '@app/app/template/context/post.provider';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 

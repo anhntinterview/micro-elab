@@ -9,9 +9,13 @@ export enum API_METHOD {
   DELETE = 'DELETE',
 }
 
-export interface IClientApiOptions extends RequestInit {}
+export type BodyDataType = {
+  bodyData: Record<string, any>
+}
+
+export interface IApiOptions extends RequestInit {}
 /*
-export type ClientApiOptionsType = {
+export type ApiOptionsType = {
   method: API_METHOD;
   headers: Record<string, unknown>;
   mode: string | 'cors'; // cors", "no-cors", "same-origin", "navigate"
@@ -29,7 +33,7 @@ export type ClientApiOptionsType = {
 } | {};
 */
 
-export type ClientApiHeadersType =
+export type ApiHeadersType =
   | {
       Accept: string | '*';
       'Content-Type': string | 'application/json';
@@ -46,18 +50,18 @@ export type ClientApiHeadersType =
     }
   | {};
 
-abstract class BaseClientApiService<ResponseType> {
+abstract class BaseApiService<ResponseType> {
   protected response: ResponseType | undefined;
   private domain: string = DOMAIN;
   private port: number = API_PORT;
   private protocal: string = PROTOCAL;
   private _endpoint: string = 'api';
-  private _headers: ClientApiHeadersType = {
+  private _headers: ApiHeadersType = {
     'Content-Type': 'application/json',
   };
-  private _body: Record<string, unknown> = {};
+  private _body!: BodyInit;
   private _param: Record<string, unknown> = {};
-  protected _options: IClientApiOptions = {};
+  protected _options: IApiOptions = {};
 
   public set endpoint(v: string) {
     this._endpoint = `api${v}`;
@@ -67,19 +71,19 @@ abstract class BaseClientApiService<ResponseType> {
     return this._endpoint;
   }
 
-  public set headers(v: ClientApiHeadersType) {
+  public set headers(v: ApiHeadersType) {
     this._headers = v;
   }
 
-  public get headers(): ClientApiHeadersType {
+  public get headers(): ApiHeadersType {
     return this._headers;
   }
 
-  public set body(v: Record<string, unknown>) {
+  public set body(v: BodyInit) {
     this._body = v;
   }
 
-  public get body(): Record<string, unknown> {
+  public get body(): BodyInit {
     return this._body;
   }
 
@@ -91,11 +95,11 @@ abstract class BaseClientApiService<ResponseType> {
     return this._param;
   }
 
-  public set options(v: IClientApiOptions) {
+  public set options(v: IApiOptions) {
     this._options = v;
   }
 
-  public get options(): IClientApiOptions {
+  public get options(): IApiOptions {
     return this._options;
   }
 
@@ -116,7 +120,9 @@ abstract class BaseClientApiService<ResponseType> {
     }
   }
 
-  constructor() {}
+  constructor() {
+    this.options.mode = 'cors'
+  }
 }
 
-export default BaseClientApiService;
+export default BaseApiService;

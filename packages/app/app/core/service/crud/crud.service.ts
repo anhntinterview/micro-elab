@@ -3,24 +3,24 @@ import {
   useMutation,
   QueryClient,
   UseQueryResult,
-} from 'react-query';
-import ClientApiService from '../api/api.service';
+  QueryKey,
+} from '@tanstack/react-query';
+import ApiService from '../api/api.service';
 import { areValuesValid } from '../../util';
 import { revalidateTime } from '@app/app/template/envVars';
 import { Service } from 'typedi';
 
 @Service()
-class CRUDService<ResponseType> extends ClientApiService<ResponseType> {
+class CRUDService<ResponseType> extends ApiService<ResponseType> {
+  private queryClient = new QueryClient();
+  queryKey!: QueryKey;
 
-  all(queryKey: Array<string | Record<string, unknown>>) {
-    const query = useQuery<ResponseType>({
-      queryKey: queryKey,
-      queryFn: () => this.get(),
-      cacheTime: revalidateTime,
-      staleTime: 0,
-    });
-    return query;
-  }
+  all = useQuery<ResponseType>({
+    queryKey: this.queryKey,
+    queryFn: () => this.get(),
+    cacheTime: revalidateTime,
+    staleTime: 0,
+  });
 
   fetchOne(
     queryKey: Array<string | Record<string, unknown>>,
@@ -37,23 +37,18 @@ class CRUDService<ResponseType> extends ClientApiService<ResponseType> {
     return query;
   }
 
-  add(
-    queryKey: Array<string | Record<string, unknown>>,
-    setCurrentPage: (page: React.ReactNode) => unknown,
-    newPage: React.ReactNode
-  ) {
-    const queryClient = new QueryClient();
-    const mutation = useMutation({
-      mutationFn: async () => await this.post(),
+  add = useMutation(
+    async () => {
+      const data = await this.post();
+      return data;
+    },
+    {
       onSuccess: (data) => {
-        queryClient.setQueryData(queryKey, data);
-        queryClient.invalidateQueries(queryKey, { exact: true });
-        setCurrentPage(newPage);
+        this.queryClient.setQueryData(this.queryKey, data);
+        this.queryClient.invalidateQueries(this.queryKey, { exact: true });
       },
-    });
-
-    return mutation;
-  }
+    }
+  );
 
   addMany(queryKey: Array<string | Record<string, unknown>>) {
     const queryClient = new QueryClient();

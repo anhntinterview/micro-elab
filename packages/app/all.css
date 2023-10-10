@@ -521,9 +521,9 @@ textarea {
 input,
 textarea {
   font-family: var(--font-family-three);
-  border: 0;
+  /* border: 0;
   border-radius: 0;
-  outline: 0;
+  outline: 0; */
   background-color: transparent;
   box-shadow: none;
 }
