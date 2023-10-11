@@ -32,7 +32,7 @@ const Articles: React.FunctionComponent<IArticlesProps> = async () => {
                 <>
                   <div className="item-image global-image global-image-orientation global-radius">
                     <a
-                      href={`${item.slug}`}
+                      href={`/articles/${item.id}`}
                       className="global-link"
                       aria-label="_article01"
                     ></a>

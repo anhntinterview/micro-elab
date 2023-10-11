@@ -10,10 +10,14 @@ export enum API_METHOD {
 }
 
 export type BodyDataType = {
-  bodyData: Record<string, any>
-}
+  bodyData: Record<string, any>;
+};
 
-export interface IApiOptions extends RequestInit {}
+export interface IApiOptions extends RequestInit {
+  next: {
+    revalidate: number;
+  };
+}
 /*
 export type ApiOptionsType = {
   method: API_METHOD;
@@ -61,7 +65,11 @@ abstract class BaseApiService<ResponseType> {
   };
   private _body!: BodyInit;
   private _param: Record<string, unknown> = {};
-  protected _options: IApiOptions = {};
+  protected _options: IApiOptions = {
+    next: {
+      revalidate: 0, // use 0 to opt out of using cache
+    },
+  };
 
   public set endpoint(v: string) {
     this._endpoint = `api${v}`;
@@ -121,7 +129,7 @@ abstract class BaseApiService<ResponseType> {
   }
 
   constructor() {
-    this.options.mode = 'cors'
+    this.options.mode = 'cors';
   }
 }
 
