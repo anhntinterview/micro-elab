@@ -7,19 +7,27 @@ import useDebounce from '@app/app/util/useDebounce';
 import CustomEditorMenu from './CustomEditorMenu';
 import { PostBodyDataValidation } from '@app/app/template/entity/post.entity';
 import { TAG_NAME } from '../../entity/tag.entity';
+import Container from 'typedi';
+import CRUDService from '@app/app/core/service/crud/crud.service';
+import { UseMutationResult } from '@tanstack/react-query';
 
 interface IEditorProps {
-  addPost: (body: PostBodyDataValidation) => void;
+  // crudService: CRUDService<unknown, unknown>;
+  // addPost: UseMutationResult<any, unknown, void, unknown>;
+  addPost: UseMutationResult<any, unknown, PostBodyDataValidation, unknown>;
 }
 
-const CustomEditor: React.FunctionComponent<IEditorProps> = ({ addPost }) => {
+const CustomEditor: React.FunctionComponent<IEditorProps> = ({
+  // crudService,
+  addPost,
+}) => {
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
   const bodyData: PostBodyDataValidation = {
-    title,
+    title: title,
     coverImage:
       'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
-    content,
+    content: content,
     ogImage: '',
     customerId: '80d5ef8f-9df1-4894-9952-83497b865022',
     tags: [{ name: TAG_NAME.POST }],
@@ -27,7 +35,13 @@ const CustomEditor: React.FunctionComponent<IEditorProps> = ({ addPost }) => {
 
   const handlePost = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    addPost(bodyData);
+    addPost.mutate(bodyData);
+    /*
+    const addPostQueryKey = ['add_post']
+    crudService.endpoint = '/post/c';
+    crudService.body = JSON.stringify(bodyData);
+    crudService.add(addPostQueryKey).mutate();
+    */
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

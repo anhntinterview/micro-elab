@@ -4,13 +4,34 @@ import * as React from 'react';
 import { heroStyle2, heroStyle3 } from './inlineStyle';
 import CardLayout1 from '../card/CardLayout1';
 import Subcribe from '../subcribe';
-import { usePostContext } from '../../template/context/post.provider';
+import { useElementContext } from '../../template/context/element.provider';
+import { Post } from '@app/app/template/entity/post.entity';
+import { DTO } from '@app/app/template/entity';
 import Loading from '../loading';
 
 interface IHeroProps {}
 
 const Hero: React.FunctionComponent<IHeroProps> = ({}) => {
-  const { list, isFetched } = usePostContext();
+  /*
+  const { query } = useElementContext();
+  React.useEffect(() => {
+    // Khi component được tạo, sử dụng fetchDataQuery để lấy dữ liệu từ API
+    query.refetch();
+  }, [query]);
+
+  if (query.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (query.isError) {
+    return <div>Error</div>;
+  }
+  const data = query.data;
+  console.log(`data: `,query.isError);
+  */
+  const { isFetched, data } = useElementContext();
+  console.log(`data in hero component:`, data);
+  
   return (
     <div className="hero-section">
       <div className="hero-wrap">
@@ -48,9 +69,9 @@ const Hero: React.FunctionComponent<IHeroProps> = ({}) => {
             >
               <div className="flickity-viewport" style={heroStyle2}>
                 <div className="flickity-slider" style={heroStyle3}>
-                  {isFetched && list ? (
-                    list.map((item) => {
-                      return <CardLayout1 post={item} />;
+                  {isFetched ? (
+                    data!.list.map((item) => {
+                      return <CardLayout1 key={item.id} post={item} />;
                     })
                   ) : (
                     <Loading />
