@@ -7,16 +7,15 @@ import * as React from 'react';
 interface IAddingArticleProps {}
 
 const AddingArticle: React.FunctionComponent<IAddingArticleProps> = () => {
-  // return <CustomEditor />;
-  const { 
-    // crudService, 
-    addPost 
+  const {
+    globalPostProps: { addRecord },
   } = useElementContext();
 
-  return <CustomEditor 
-    addPost={addPost} 
-    // crudService={crudService} 
-  />;
+  return (
+    <CustomEditor
+      addPost={addRecord}
+    />
+  );
 };
 
 export default AddingArticle;

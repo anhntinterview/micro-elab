@@ -33,7 +33,7 @@ class CRUDService {
 
   all = <R>(
     endpoint: string,
-    queryKey: Array<string | Record<string, unknown>>
+    queryKey: QueryKey
   ) => {
     return useQuery<R>({
       queryKey,
@@ -43,7 +43,7 @@ class CRUDService {
 
   add = <B>(
     endpoint: string,
-    queryKey: Array<string | Record<string, unknown>>
+    queryKey: QueryKey
   ) => {
     return useMutation<any, unknown, B, unknown>(CRUDService.getApiServiceInst(endpoint).post, {
       onSuccess: (data) => {

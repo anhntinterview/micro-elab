@@ -12,26 +12,13 @@ import Loading from '../loading';
 interface IHeroProps {}
 
 const Hero: React.FunctionComponent<IHeroProps> = ({}) => {
-  /*
-  const { query } = useElementContext();
-  React.useEffect(() => {
-    // Khi component được tạo, sử dụng fetchDataQuery để lấy dữ liệu từ API
-    query.refetch();
-  }, [query]);
-
-  if (query.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (query.isError) {
-    return <div>Error</div>;
-  }
-  const data = query.data;
-  console.log(`data: `,query.isError);
-  */
-  const { isFetched, data } = useElementContext();
+  const {
+    globalPostProps: {
+      query: { isFetched, data },
+    },
+  } = useElementContext();
   console.log(`data in hero component:`, data);
-  
+
   return (
     <div className="hero-section">
       <div className="hero-wrap">

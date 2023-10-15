@@ -27,7 +27,11 @@ const Posts: React.FunctionComponent<IPostsProps> = (props) => {
   console.log(`data: `,data);
   */
 
-  const { isFetched, data } = useElementContext();
+  const {
+    globalPostProps: {
+      query: { isFetched, data },
+    },
+  } = useElementContext();
 
   return (
     <div className="loop-section global-padding">
