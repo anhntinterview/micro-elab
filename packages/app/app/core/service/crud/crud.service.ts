@@ -10,7 +10,7 @@ import {
 import ApiService from '../api/api.service';
 import { areValuesValid } from '../../util';
 import { revalidateTime } from '@app/app/template/envVars';
-import { Service } from 'typedi';
+import Container, { Service } from 'typedi';
 
 export const isFetchedWithSuccess = <TData, TError = unknown>(
   query: UseQueryResult<TData, TError>
@@ -18,8 +18,41 @@ export const isFetchedWithSuccess = <TData, TError = unknown>(
   return !query.isError && !query.isLoading && query.data !== undefined;
 };
 @Service()
-class CRUDService<ResponseType, B> extends ApiService<ResponseType> {
+class CRUDService {
+  
+  private static apiServiceInst: ApiService | null = null;
+
+  public static getApiServiceInst(path: string) {
+    if (!this.apiServiceInst) {
+      this.apiServiceInst = new ApiService();
+    }
+    this.apiServiceInst.endpoint = path;
+    return this.apiServiceInst;
+  }
   private queryClient = new QueryClient();
+
+  all = <R>(
+    endpoint: string,
+    queryKey: Array<string | Record<string, unknown>>
+  ) => {
+    return useQuery<R>({
+      queryKey,
+      queryFn: () => CRUDService.getApiServiceInst(endpoint).get(),
+    });
+  };
+
+  add = <B>(
+    endpoint: string,
+    queryKey: Array<string | Record<string, unknown>>
+  ) => {
+    return useMutation<any, unknown, B, unknown>(CRUDService.getApiServiceInst(endpoint).post, {
+      onSuccess: (data) => {
+        this.queryClient.setQueryData(queryKey, data);
+        this.queryClient.invalidateQueries(queryKey, { exact: true });
+      },
+    });
+  };
+
   /*
   private _queryKey: QueryKey = [''];
 
@@ -37,11 +70,7 @@ class CRUDService<ResponseType, B> extends ApiService<ResponseType> {
   });
   */
 
-  all = (queryKey: Array<string | Record<string, unknown>>) => useQuery({
-      queryKey,
-      queryFn: this.get,
-    });
-
+  
   // all<T>() {
   //   const query = useQuery<T>({
   //     queryKey: this.queryKey,
@@ -68,7 +97,7 @@ class CRUDService<ResponseType, B> extends ApiService<ResponseType> {
     return query;
   }
   */
- /*
+  /*
   add = useMutation<any, unknown, B, unknown>(this.post, {
     onSuccess: (data) => {
       this.queryClient.setQueryData(this.queryKey, data);
@@ -76,12 +105,8 @@ class CRUDService<ResponseType, B> extends ApiService<ResponseType> {
     },
   });
   */
-  add = (queryKey: Array<string | Record<string, unknown>>) => useMutation<any, unknown, B, unknown>(this.post, {
-    onSuccess: (data) => {
-      this.queryClient.setQueryData(queryKey, data);
-      this.queryClient.invalidateQueries(queryKey, { exact: true });
-    },
-  });
+  
+
   /*
   addMany(queryKey: Array<string | Record<string, unknown>>) {
     const queryClient = new QueryClient();
@@ -119,9 +144,7 @@ class CRUDService<ResponseType, B> extends ApiService<ResponseType> {
     return mutation;
   }
   */
-  constructor() {
-    super();
-  }
+  constructor() {}
 }
 
 export default CRUDService;

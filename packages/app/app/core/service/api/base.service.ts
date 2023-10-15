@@ -54,7 +54,7 @@ export type ApiHeadersType =
     }
   | {};
 
-abstract class BaseApiService<ResponseType> {
+abstract class BaseApiService {
   protected response: ResponseType | undefined;
   private domain: string = DOMAIN;
   private port: number = API_PORT;

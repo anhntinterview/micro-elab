@@ -1,9 +1,9 @@
-import { Service } from 'typedi';
+import Container, { Service } from 'typedi';
 import BaseApiService, { API_METHOD } from './base.service';
 import { isObjectEmpty } from '@app/app/core/util';
 
 @Service()
-class ApiService<ResponseType> extends BaseApiService<ResponseType> {
+class ApiService extends BaseApiService {
   constructor() {
     super();
   }
@@ -45,7 +45,7 @@ class ApiService<ResponseType> extends BaseApiService<ResponseType> {
       const rs = await fetch(this.url(), this.options);
       return rs.json();
     }
-  }
+  };
 
   protected patch = async <B>(body: B) => {
     if (isObjectEmpty(body as Record<string, any>)) {
@@ -56,7 +56,7 @@ class ApiService<ResponseType> extends BaseApiService<ResponseType> {
       const rs = await fetch(this.url(), this.options);
       return rs.json();
     }
-  }
+  };
 
   protected delete = async () => {
     if (!isObjectEmpty(this.body as Record<string, any>)) {
@@ -68,7 +68,7 @@ class ApiService<ResponseType> extends BaseApiService<ResponseType> {
       const rs = await fetch(this.url(), this.options);
       return rs.json();
     }
-  }
+  };
 }
 
 export default ApiService;
