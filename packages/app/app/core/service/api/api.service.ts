@@ -27,10 +27,10 @@ class ApiService extends BaseApiService {
       this.body = JSON.stringify(body);
       this.options.method = API_METHOD.POST;
       this.options.body = this.body;
-      console.log(`------ header: `, this.headers);
-      console.log(`------ options: `, this.options);
-      console.log(`------ body: `, this.body);
-      console.log(`------ url: `, this.url());
+      console.log(`@@ header: `, this.headers);
+      console.log(`@@ options: `, this.options);
+      console.log(`@@ body: `, this.body);
+      console.log(`@@ url: `, this.url());
       const rs = await fetch(this.url(), this.options);
       return await rs.json();
     }

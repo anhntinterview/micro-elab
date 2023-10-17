@@ -8,7 +8,9 @@ const queryClient = new QueryClient();
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ElementProvider>{children}</ElementProvider>
+      <ElementProvider>
+          {children}
+      </ElementProvider>
       {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   );

@@ -12,12 +12,16 @@ import CRUDService from '@app/app/core/service/crud/crud.service';
 import { UseMutationResult } from '@tanstack/react-query';
 
 interface IEditorProps {
-  addPost: UseMutationResult<any, unknown, PostBodyDataValidation, unknown>;
+  addPost: ({
+    enable,
+  }: {
+    enable: boolean;
+  }) =>
+    | UseMutationResult<any, unknown, PostBodyDataValidation, unknown>
+    | undefined;
 }
 
-const CustomEditor: React.FunctionComponent<IEditorProps> = ({
-  addPost,
-}) => {
+const CustomEditor: React.FunctionComponent<IEditorProps> = ({ addPost }) => {
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
   const bodyData: PostBodyDataValidation = {
@@ -32,7 +36,7 @@ const CustomEditor: React.FunctionComponent<IEditorProps> = ({
 
   const handlePost = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    addPost.mutate(bodyData);
+    addPost({ enable: true })!.mutate(bodyData);
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

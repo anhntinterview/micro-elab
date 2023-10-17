@@ -5,6 +5,9 @@ import CardLayout2 from '../card/CardLayout2';
 import CardLayout1 from '../card/CardLayout1';
 import { useElementContext } from '../../template/context/element.provider';
 import Loading from '../loading';
+import CRUDService from '@app/app/core/service/crud/crud.service';
+import { exportGlobalPostContextProps } from '@app/app/template/resource/post.resource';
+import { exportGlobalCustomerContextProps } from '@app/app/template/resource/customer.resource';
 
 interface IPostsProps {}
 
@@ -28,10 +31,9 @@ const Posts: React.FunctionComponent<IPostsProps> = (props) => {
   */
 
   const {
-    globalPostProps: {
-      query: { isFetched, data },
-    },
+    globalPostProps: { query },
   } = useElementContext();
+  const { isFetched, data } = query({ enable: true });
 
   return (
     <div className="loop-section global-padding">

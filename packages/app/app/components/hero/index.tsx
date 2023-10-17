@@ -8,15 +8,16 @@ import { useElementContext } from '../../template/context/element.provider';
 import { Post } from '@app/app/template/entity/post.entity';
 import { DTO } from '@app/app/template/entity';
 import Loading from '../loading';
+import CRUDService from '@app/app/core/service/crud/crud.service';
+import { exportGlobalPostContextProps } from '@app/app/template/resource/post.resource';
 
 interface IHeroProps {}
 
 const Hero: React.FunctionComponent<IHeroProps> = ({}) => {
   const {
-    globalPostProps: {
-      query: { isFetched, data },
-    },
+    globalPostProps: { query },
   } = useElementContext();
+  const { isFetched, data } = query({ enable: true });
   console.log(`data in hero component:`, data);
 
   return (

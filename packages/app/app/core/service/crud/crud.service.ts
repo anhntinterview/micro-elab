@@ -33,93 +33,37 @@ class CRUDService {
 
   all = <R>(
     endpoint: string,
-    queryKey: QueryKey
+    queryKey: QueryKey,
+    enable: boolean | false
   ) => {
+    console.log(`@@ running in CRUD get method`);
     return useQuery<R>({
       queryKey,
       queryFn: () => CRUDService.getApiServiceInst(endpoint).get(),
+      enabled: enable
     });
   };
 
-  add = <B>(
+  post = <B>(
     endpoint: string,
-    queryKey: QueryKey
+    queryKey: QueryKey,
+    enable: boolean | false
   ) => {
-    return useMutation<any, unknown, B, unknown>(CRUDService.getApiServiceInst(endpoint).post, {
-      onSuccess: (data) => {
-        this.queryClient.setQueryData(queryKey, data);
-        this.queryClient.invalidateQueries(queryKey, { exact: true });
-      },
-    });
+    if(enable) {
+      console.log(`@@ running in CRUD post method`);
+      return useMutation<any, unknown, B, unknown>(CRUDService.getApiServiceInst(endpoint).post, {
+        onSuccess: (data) => {
+          this.queryClient.setQueryData(queryKey, data);
+          this.queryClient.invalidateQueries(queryKey, { exact: true });
+        }
+      });
+    } else {
+      console.log('Missing enable to execute useMutation.');
+    }
+    
   };
 
   /*
-  private _queryKey: QueryKey = [''];
-
-  public get queryKey(): QueryKey {
-    return this._queryKey;
-  }
-
-  public set queryKey(v: QueryKey) {
-    this._queryKey = v;
-  }
-  
-  all = useQuery<ResponseType>({
-    queryKey: this.queryKey,
-    queryFn: this.get,
-  });
-  */
-
-  
-  // all<T>() {
-  //   const query = useQuery<T>({
-  //     queryKey: this.queryKey,
-  //     queryFn: () => this.get(),
-  //     cacheTime: revalidateTime,
-  //     staleTime: 0, // data always stale and always re-fetch if server update value
-  //   });
-  //   return query;
-  // };
-
-  /*
-  fetchOne(
-    queryKey: Array<string | Record<string, unknown>>,
-    constraintIds: Record<string, unknown>
-  ) {
-    const query = useQuery<ResponseType>({
-      queryKey: queryKey,
-      enabled: areValuesValid(constraintIds),
-      queryFn: () => this.get(),
-      cacheTime: 10 * 1000,
-      staleTime: 0,
-      onSuccess: (data: ResponseType) => data,
-    });
-    return query;
-  }
-  */
-  /*
-  add = useMutation<any, unknown, B, unknown>(this.post, {
-    onSuccess: (data) => {
-      this.queryClient.setQueryData(this.queryKey, data);
-      this.queryClient.invalidateQueries(this.queryKey, { exact: true });
-    },
-  });
-  */
-  
-
-  /*
-  addMany(queryKey: Array<string | Record<string, unknown>>) {
-    const queryClient = new QueryClient();
-    const mutation = useMutation({
-      mutationFn: async () => await this.post(),
-      onSuccess: (data) => {
-        queryClient.setQueryData(queryKey, data); // updadte value via query key
-        queryClient.invalidateQueries(queryKey, { exact: true });
-      },
-    });
-    return mutation;
-  }
-
   update(queryKey: Array<string | Record<string, unknown>>) {
     const queryClient = new QueryClient();
     const mutation = useMutation({

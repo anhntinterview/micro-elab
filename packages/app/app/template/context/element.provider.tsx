@@ -1,48 +1,22 @@
 'use client';
 
-import CRUDService from '@app/app/core/service/crud/crud.service';
-import { DTO } from '@app/app/template/entity';
 import { createContext, useContext } from 'react';
+import { ElementContextType, GlobalElementPropsType } from './type';
+import { globalProps } from './global.context';
 import Container from 'typedi';
-import {
-  exportGlobalCustomerContextProps,
-  exportGlobalPostContextProps,
-} from './global.context';
-import { GlobalElementtPropsType } from './type';
-import {
-  Post,
-  PostBodyDataValidation,
-} from '@app/app/template/entity/post.entity';
-import {
-  Customer,
-  CustomerBodyDataValidation,
-} from '../entity/customer.entity';
+import CRUDService from '@app/app/core/service/crud/crud.service';
 
 interface ElementProviderProps {
   children?: React.ReactNode;
 }
 
-export type ElementContextType = {
-  globalPostProps: GlobalElementtPropsType<DTO<Post>, PostBodyDataValidation>;
-  globalCustomerProps: GlobalElementtPropsType<
-    DTO<Customer>,
-    CustomerBodyDataValidation
-  >;
-};
-
 const ElementContext = createContext<ElementContextType | null>(null);
 
 export const ElementProvider = ({ children }: ElementProviderProps) => {
   const crudService = Container.get(CRUDService);
-  const globalPostProps = exportGlobalPostContextProps(crudService);
-  const globalCustomerProps = exportGlobalCustomerContextProps(crudService);
-
   return (
     <ElementContext.Provider
-      value={{
-        globalPostProps,
-        globalCustomerProps,
-      }}
+      value={globalProps(crudService)}
     >
       {children}
     </ElementContext.Provider>
