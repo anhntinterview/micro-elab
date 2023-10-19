@@ -34,15 +34,17 @@ export type GlobalElementPropsType<R, B> = {
     enable: boolean;
   }) => UseQueryResult<R, unknown>;
   // query: UseQueryResult<R, unknown>;
+  // addRecord: UseMutationResult<any, unknown, B, unknown> | undefined
   addRecord: ({
     enable,
   }: {
     enable: boolean;
   }) => UseMutationResult<any, unknown, B, unknown> | undefined;
-  // addRecord: UseMutationResult<any, unknown, B, unknown>;
 };
 
 export type GlobalAuthenticatePropsType<L, R> = {
+  // login: UseMutationResult<any, unknown, L, unknown> | undefined
+  // register: UseMutationResult<any, unknown, R, unknown> | undefined
   login: ({
     enable,
   }: {

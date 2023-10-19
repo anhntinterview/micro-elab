@@ -8,9 +8,7 @@ import {
   QueryObserverSuccessResult,
 } from '@tanstack/react-query';
 import ApiService from '../api/api.service';
-import { areValuesValid } from '../../util';
-import { revalidateTime } from '@app/app/template/envVars';
-import Container, { Service } from 'typedi';
+import { Service } from 'typedi';
 
 export const isFetchedWithSuccess = <TData, TError = unknown>(
   query: UseQueryResult<TData, TError>
@@ -19,7 +17,8 @@ export const isFetchedWithSuccess = <TData, TError = unknown>(
 };
 @Service()
 class CRUDService {
-  
+  private queryClient = new QueryClient();
+
   private static apiServiceInst: ApiService | null = null;
 
   public static getApiServiceInst(path: string) {
@@ -29,26 +28,33 @@ class CRUDService {
     this.apiServiceInst.endpoint = path;
     return this.apiServiceInst;
   }
-  private queryClient = new QueryClient();
 
-  all = <R>(
+  all = <R>({
+    endpoint,
+    queryKey,
+    enable
+  }:{
     endpoint: string,
     queryKey: QueryKey,
     enable: boolean | false
-  ) => {
+  }) => {
     console.log(`@@ running in CRUD get method`);
     return useQuery<R>({
       queryKey,
       queryFn: () => CRUDService.getApiServiceInst(endpoint).get(),
-      enabled: enable
+      enabled: enable,
     });
   };
 
-  post = <B>(
+  post = <B>({
+    endpoint,
+    queryKey,
+    enable
+  }:{
     endpoint: string,
     queryKey: QueryKey,
     enable: boolean | false
-  ) => {
+  }) => {
     if(enable) {
       console.log(`@@ running in CRUD post method`);
       return useMutation<any, unknown, B, unknown>(CRUDService.getApiServiceInst(endpoint).post, {

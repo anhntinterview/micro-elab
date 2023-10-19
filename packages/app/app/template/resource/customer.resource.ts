@@ -11,22 +11,18 @@ export const exportGlobalCustomerContextProps = (
   crudService: CRUDService
 ): GlobalElementPropsType<DTO<Customer>, CustomerBodyDataValidation> => {
   // GET
-  const getCustomerApiPath = '/customer';
-  const getCustomerQueryKey = ['customers'];
-  const query = ({ enable }: { enable: boolean }) => crudService.all<DTO<Customer>>(
-    getCustomerApiPath,
-    getCustomerQueryKey,
-    enable
-  );
+  const query = ({ enable }: { enable: boolean }) => crudService.all<DTO<Customer>>({
+    endpoint: '/customer',
+    queryKey: ['customers'],
+    enable,
+  });
 
   // POST
-  const postCustomerApiPath = '/customer/c';
-  const addCustomerQueryKey = ['add_customer'];
-  const addRecord = ({ enable }: { enable: boolean }) => crudService.post<CustomerBodyDataValidation>(
-    postCustomerApiPath,
-    addCustomerQueryKey,
-    enable
-  );
+  const addRecord = ({ enable }: { enable: boolean }) => crudService.post<CustomerBodyDataValidation>({
+    endpoint: '/customer/c',
+    queryKey: ['add_customer'],
+    enable,
+  });
 
   return {
     query,

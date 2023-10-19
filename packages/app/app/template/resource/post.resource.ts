@@ -12,19 +12,20 @@ export const exportGlobalPostContextProps = (
   crudService: CRUDService
 ): GlobalElementPropsType<DTO<Post>, PostBodyDataValidation> => {
   // GET
-  const getPostApiPath = '/post';
-  const getPostQueryKey = ['posts'];
   const query = ({ enable }: { enable: boolean }) =>
-    crudService.all<DTO<Post>>(getPostApiPath, getPostQueryKey, enable);
+    crudService.all<DTO<Post>>({
+      endpoint: '/post',
+      queryKey: ['posts'],
+      enable,
+    });
 
   // POST
-  const postPostApiPath = '/post/c';
-  const addPostQueryKey = ['add_post'];
-  const addRecord = ({ enable }: { enable: boolean }) => crudService.post<PostBodyDataValidation>(
-    postPostApiPath,
-    addPostQueryKey,
-    enable
-  );
+  const addRecord = ({ enable }: { enable: boolean }) =>
+    crudService.post<PostBodyDataValidation>({
+      endpoint: '/post/c',
+      queryKey: ['add_post'],
+      enable,
+    });
 
   return {
     query,

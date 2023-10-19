@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import { ElementContextType, GlobalElementPropsType } from './type';
+import { ElementContextType } from './type';
 import { globalProps } from './global.context';
 import Container from 'typedi';
 import CRUDService from '@app/app/core/service/crud/crud.service';

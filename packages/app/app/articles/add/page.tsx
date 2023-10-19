@@ -10,10 +10,10 @@ const AddingArticle: React.FunctionComponent<IAddingArticleProps> = () => {
   const {
     globalPostProps: { addRecord },
   } = useElementContext();
-
+  const addRecordMutate = addRecord({enable: true})
   return (
     <CustomEditor
-      addPost={addRecord}
+      addRecordMutate={addRecordMutate}
     />
   );
 };

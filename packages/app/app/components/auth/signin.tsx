@@ -1,26 +1,26 @@
 'use client';
 
+import SignInModel from '@app/app/signin/model';
 import Input from '@app/app/template/component/Input';
 import { useElementContext } from '@app/app/template/context/element.provider';
 import { LoginBodyDataValidation } from '@app/app/template/entity/auth.entity';
+import { UseMutationResult } from '@tanstack/react-query';
 import { plainToInstance } from 'class-transformer';
 import { ValidationError, validate } from 'class-validator';
 import { isArray } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-export interface ISignInForm {}
+export interface ISignInForm {
+  loginMutate: UseMutationResult<any, unknown, LoginBodyDataValidation, unknown> | undefined
+}
 
-const SignInForm: React.FunctionComponent<ISignInForm> = (props) => {
-  const {
-    globalAuthProps: { login },
-  } = useElementContext();
+const SignInForm: React.FunctionComponent<ISignInForm> = ({loginMutate}) => {
   const [formData, setFormData] = useState(new LoginBodyDataValidation());
   const [validationErrors, setValidationErrors] = useState({
     email: '',
     password: '',
   });
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   // Validation
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,16 +85,10 @@ const SignInForm: React.FunctionComponent<ISignInForm> = (props) => {
   // Handle submit
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsFormSubmitted(true);
     try {
       await validate(formData);
-      // Submit the form if validation passes -> isButtonDisabled method
-      // At here, we have 2 conditions which support clicking form
-      // 1. Button was disabled and it has to pass condition validate
-      // 2. The form has to clicking
-      if (isFormSubmitted) {
-        login({enable: true})!.mutate(formData);
-      }
+      loginMutate!.mutate(formData)
+      // model.login({enable: true})!.mutate(formData)
     } catch (errors: any) {
       console.log(`errors in handleSubmit: `, errors);
     }

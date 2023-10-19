@@ -5,27 +5,30 @@ import { GlobalAuthenticatePropsType } from '../context/type';
 import { LoginBodyDataValidation } from '../entity/auth.entity';
 import { CustomerBodyDataValidation } from '../entity/customer.entity';
 
+// TODO: OOP Post was duplicate params
+
 export const exportGlobalAuthContextProps = (
   crudService: CRUDService
-): GlobalAuthenticatePropsType<LoginBodyDataValidation, CustomerBodyDataValidation> => {
+): GlobalAuthenticatePropsType<
+  LoginBodyDataValidation,
+  CustomerBodyDataValidation
+> => {
   console.log(`runing in exportGlobalAuthContextProps`);
   // GET
-  const loginApiPath = '/auth/login';
-  const loginQueryKey = ['login'];
-  const login = ({ enable }: { enable: boolean }) => crudService.post<LoginBodyDataValidation>(
-    loginApiPath,
-    loginQueryKey,
-    enable
-  );
+  const login = ({ enable }: { enable: boolean }) =>
+    crudService.post<LoginBodyDataValidation>({
+      endpoint: '/auth/login',
+      queryKey: ['login'],
+      enable,
+    });
 
   // POST
-  const registerApiPath = '/customer/c';
-  const registerQueryKey = ['register'];
-  const register = ({ enable }: { enable: boolean }) =>crudService.post<CustomerBodyDataValidation>(
-    registerApiPath,
-    registerQueryKey,
-    enable
-  );
+  const register = ({ enable }: { enable: boolean }) =>
+    crudService.post<CustomerBodyDataValidation>({
+      endpoint: '/customer/c',
+      queryKey: ['register'],
+      enable,
+    });
 
   return {
     login,
