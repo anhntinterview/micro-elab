@@ -18,7 +18,7 @@ export const exportGlobalCustomerContextProps = (
   });
 
   // POST
-  const addRecord = ({ enable }: { enable: boolean }) => crudService.post<CustomerBodyDataValidation>({
+  const addRecord = ({ enable }: { enable: boolean }) => crudService.post<CustomerBodyDataValidation, unknown>({
     endpoint: '/customer/c',
     queryKey: ['add_customer'],
     enable,

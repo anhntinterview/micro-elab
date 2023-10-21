@@ -46,7 +46,7 @@ class CRUDService {
     });
   };
 
-  post = <B>({
+  post = <B,R>({
     endpoint,
     queryKey,
     enable
@@ -57,10 +57,11 @@ class CRUDService {
   }) => {
     if(enable) {
       console.log(`@@ running in CRUD post method`);
-      return useMutation<any, unknown, B, unknown>(CRUDService.getApiServiceInst(endpoint).post, {
+      return useMutation<R, unknown, B, unknown>(CRUDService.getApiServiceInst(endpoint).post, {
         onSuccess: (data) => {
           this.queryClient.setQueryData(queryKey, data);
           this.queryClient.invalidateQueries(queryKey, { exact: true });
+          return data;
         }
       });
     } else {

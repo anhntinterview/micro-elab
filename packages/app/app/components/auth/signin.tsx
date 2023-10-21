@@ -1,5 +1,7 @@
 'use client';
 
+import { SessionDataType } from '@app/app/core/service/session/session.service';
+import { isObjectEmpty } from '@app/app/core/util';
 import SignInModel from '@app/app/signin/model';
 import Input from '@app/app/template/component/Input';
 import { useElementContext } from '@app/app/template/context/element.provider';
@@ -12,15 +14,33 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 export interface ISignInForm {
-  loginMutate: UseMutationResult<any, unknown, LoginBodyDataValidation, unknown> | undefined
+  loginMutate:
+    | UseMutationResult<any, unknown, LoginBodyDataValidation, unknown>
+    | undefined;
+  authenticate(
+    bodyData: LoginBodyDataValidation,
+    mutationResult:
+      | UseMutationResult<
+          SessionDataType,
+          unknown,
+          LoginBodyDataValidation,
+          unknown
+        >
+      | undefined
+  ): void;
 }
 
-const SignInForm: React.FunctionComponent<ISignInForm> = ({loginMutate}) => {
+export type FormDataErrorType = {
+  email?: string;
+  password?: string;
+};
+
+const SignInForm: React.FunctionComponent<ISignInForm> = ({
+  loginMutate,
+  authenticate,
+}) => {
   const [formData, setFormData] = useState(new LoginBodyDataValidation());
-  const [validationErrors, setValidationErrors] = useState({
-    email: '',
-    password: '',
-  });
+  const [validationErrors, setValidationErrors] = useState<FormDataErrorType>();
 
   // Validation
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,17 +58,27 @@ const SignInForm: React.FunctionComponent<ISignInForm> = ({loginMutate}) => {
           if (item.constraints) {
             const error = Object.values(item.constraints)[0];
             setValidationErrors((prevState) => {
-              return {
-                ...prevState,
-                [item.property]: error,
-              };
+              if (prevState) {
+                return {
+                  ...prevState,
+                  [item.property]: error,
+                };
+              }
             });
           }
         });
       } else {
-        setValidationErrors({
-          email: '',
-          password: '',
+        setValidationErrors((prevState) => {
+          if (prevState) {
+            return {
+              ...prevState,
+              [name]: '',
+            };
+          } else {
+            return {
+              [name]: '',
+            };
+          }
         });
       }
     });
@@ -87,8 +117,8 @@ const SignInForm: React.FunctionComponent<ISignInForm> = ({loginMutate}) => {
     e.preventDefault();
     try {
       await validate(formData);
-      loginMutate!.mutate(formData)
-      // model.login({enable: true})!.mutate(formData)
+      authenticate(formData, loginMutate);
+      // loginMutate!.mutate(formData)
     } catch (errors: any) {
       console.log(`errors in handleSubmit: `, errors);
     }
@@ -96,10 +126,22 @@ const SignInForm: React.FunctionComponent<ISignInForm> = ({loginMutate}) => {
 
   console.log(`@@ formData: `, formData);
   console.log(`@@ validationErrors: `, validationErrors);
-  console.log(`@@ validationErrors: `, validationErrors);
 
   // disable button
-  const isButtonDisabled = Object.values(validationErrors).some((error) => error !== '');
+  let isButtonDisabled;
+  if(validationErrors) {
+    isButtonDisabled = true;
+    if(Object.keys(validationErrors).length > 1) {
+      if(!Object.values(validationErrors).some((error) => error !== '')) {
+        isButtonDisabled = false
+      }
+    }
+  } else if(validationErrors === undefined) {
+    isButtonDisabled = true;
+  } else {
+    isButtonDisabled = false
+  }
+  console.log(`@@ isButtonDisabled: `, isButtonDisabled);
 
   // control session
   // router
@@ -114,9 +156,11 @@ const SignInForm: React.FunctionComponent<ISignInForm> = ({loginMutate}) => {
             type="text"
             name="email"
             value={formData.email}
-            onChange={handleInputChange}
+            onInput={handleInputChange}
           />
-          <span className="error">{validationErrors.email}</span>
+          <span className="error">
+            {validationErrors ? validationErrors.email : ''}
+          </span>
         </div>
         <div>
           <label>Password:</label>
@@ -124,9 +168,11 @@ const SignInForm: React.FunctionComponent<ISignInForm> = ({loginMutate}) => {
             type="password"
             name="password"
             value={formData.password}
-            onChange={handleInputChange}
+            onInput={handleInputChange}
           />
-          <span className="error">{validationErrors.password}</span>
+          <span className="error">
+            {validationErrors ? validationErrors.password : ''}
+          </span>
         </div>
         <button
           disabled={isButtonDisabled}

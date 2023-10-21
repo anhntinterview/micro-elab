@@ -4,6 +4,7 @@ import { DTO } from '../entity';
 import { GlobalAuthenticatePropsType } from '../context/type';
 import { LoginBodyDataValidation } from '../entity/auth.entity';
 import { CustomerBodyDataValidation } from '../entity/customer.entity';
+import { SessionDataType } from '@app/app/core/service/session/session.service';
 
 // TODO: OOP Post was duplicate params
 
@@ -16,7 +17,7 @@ export const exportGlobalAuthContextProps = (
   console.log(`runing in exportGlobalAuthContextProps`);
   // GET
   const login = ({ enable }: { enable: boolean }) =>
-    crudService.post<LoginBodyDataValidation>({
+    crudService.post<LoginBodyDataValidation, SessionDataType>({
       endpoint: '/auth/login',
       queryKey: ['login'],
       enable,
@@ -24,7 +25,7 @@ export const exportGlobalAuthContextProps = (
 
   // POST
   const register = ({ enable }: { enable: boolean }) =>
-    crudService.post<CustomerBodyDataValidation>({
+    crudService.post<CustomerBodyDataValidation, unknown>({
       endpoint: '/customer/c',
       queryKey: ['register'],
       enable,

@@ -21,7 +21,7 @@ export const exportGlobalPostContextProps = (
 
   // POST
   const addRecord = ({ enable }: { enable: boolean }) =>
-    crudService.post<PostBodyDataValidation>({
+    crudService.post<PostBodyDataValidation, unknown>({
       endpoint: '/post/c',
       queryKey: ['add_post'],
       enable,
